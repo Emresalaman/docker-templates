@@ -1,6 +1,6 @@
 # builder stage
 # from golang alpine image
-FROM golang:1.19-alpine as builder
+FROM golang:1.20-alpine as builder
 
 # Installing Git for alpine
 RUN apk add --no-cache git
@@ -9,7 +9,7 @@ RUN apk add --no-cache git
 WORKDIR /src
 
 # build argument for framework
-ARG FRAMEWORK=echo
+ARG FRAMEWORK=microframework micro nasıl
 
 # copy go.mod and go.sum
 COPY /$FRAMEWORK/go.mod /$FRAMEWORK/go.sum ./
@@ -33,7 +33,7 @@ COPY --from=builder main .
 RUN chmod +x /main
 
 # expose port 80
-EXPOSE 80
+EXPOSE :8082
 
 # run app executeable file
 CMD ["./main"]
